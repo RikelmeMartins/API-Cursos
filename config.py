@@ -1,9 +1,19 @@
+import os
+from dotenv import load_dotenv
+
 DEBUG = True
 
-USERNAME = 'root'
-PASSWORD = '080924'
-SERVER = 'localhost'
-DB = 'api_flask'
+load_dotenv()
 
-SQLALCHEMY_DATABASE_URI = f'mysql://{USERNAME}:{PASSWORD}@{SERVER}/{DB}'
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+
+SQLALCHEMY_DATABASE_URI = (
+    f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+)
+
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+SECRET_KEY = os.getenv("SECRET_KEY")
