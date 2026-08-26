@@ -46,8 +46,8 @@ class FormacaoDetail(Resource):
             descricao = request.json.get("descricao")
             nova_formacao = formacao.Formacao(nome=nome, descricao=descricao)
             formacao_service.atualiza_formacao(formacao_bd, nova_formacao)
-            formacap_atualizado = formacao_service.listar_formacao_id(id)
-            return make_response(fr.jsonify(formacap_atualizado), 200)
+            formacao_atualizado = formacao_service.listar_formacao_id(id)
+            return make_response(fr.jsonify(formacao_atualizado), 200)
 
     def delete(self, id):
         formacao_bd = formacao_service.listar_formacao_id(id)
