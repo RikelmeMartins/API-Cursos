@@ -19,8 +19,9 @@ class FormacaoList(Resource):
         else:
             nome = request.json.get("nome")
             descricao = request.json.get("descricao")
+            professores = request.json.get("professores")
 
-            nova_formacao = formacao.Formacao(nome=nome, descricao=descricao)
+            nova_formacao = formacao.Formacao(nome=nome, descricao=descricao, professores=professores)
             resultado = formacao_service.cadastrar_formacao(nova_formacao)
             x = fr.jsonify(resultado)
             return make_response(x, 201)
@@ -44,7 +45,9 @@ class FormacaoDetail(Resource):
         else:
             nome = request.json.get("nome")
             descricao = request.json.get("descricao")
-            nova_formacao = formacao.Formacao(nome=nome, descricao=descricao)
+            professores = request.json.get("professores")
+            
+            nova_formacao = formacao.Formacao(nome=nome, descricao=descricao, professores=professores)
             formacao_service.atualiza_formacao(formacao_bd, nova_formacao)
             formacao_atualizado = formacao_service.listar_formacao_id(id)
             return make_response(fr.jsonify(formacao_atualizado), 200)
