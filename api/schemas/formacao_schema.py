@@ -7,7 +7,7 @@ class FormacaoSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = formacao_model.Formacao
         _load_instance = True
-        _declared_fields = ("id", "nome", "descricao", "cursos", "professores")
+        fields = ("id", "nome", "descricao", "cursos", "professores", "_links")
 
     nome = fields.String(required=True)
     descricao = fields.String(required=True)
@@ -20,3 +20,18 @@ class FormacaoSchema(ma.SQLAlchemyAutoSchema):
             dump_only=True
         )
     )
+
+    _links = ma.Hyperlinks({
+            "get": ma.URLFor(
+                "formacaodetail",
+                values={"id": "<id>"}
+            ),
+            "put": ma.URLFor(
+                "formacaodetail",
+                values={"id": "<id>"}
+            ),
+            "delete": ma.URLFor(
+                "formacaodetail",
+                values={"id": "<id>"}
+            )
+    })
